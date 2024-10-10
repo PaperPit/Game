@@ -9,7 +9,3 @@ df = pd.read_json('recipes.json')
 # Выводим на экран первые строки полученного DataFrame
 combined_set = set(chain.from_iterable(df['ingredients']))
 print(len(combined_set))
-#так быстро ?
-#a;sdfj
-#sadfasd
-          
