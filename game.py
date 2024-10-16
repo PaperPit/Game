@@ -1,17 +1,11 @@
-import requests
-from bs4 import BeautifulSoup
+import pandas as pd
+from itertools import chain
 
-# Определяем адрес страницы
-url = 'https://ru.wikipedia.org/wiki/Pink_Floyd'
-def wiki_header(url):
-    # Выполняем GET-запрос
-    response = requests.get(url)
-    # Создаём объект BeautifulSoup
-    page = BeautifulSoup(response.text, 'html.parser')
-    vacancy_header = page.find('span',class_='mw-page-title-main')
-    return vacancy_header.string
+# Импортируем модуль pandas
+import pandas as pd 
+# Создаём объект DataFrame, загружая содержимое файла recipes.json
+df = pd.read_json('recipes.json') 
 
-
-print(wiki_header(url))
-
-
+# Выводим на экран первые строки полученного DataFrame
+combined_set = set(chain.from_iterable(df['ingredients']))
+print(len(combined_set))
