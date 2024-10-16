@@ -1,11 +1,7 @@
-import pandas as pd
-from itertools import chain
-
-# Импортируем модуль pandas
-import pandas as pd 
-# Создаём объект DataFrame, загружая содержимое файла recipes.json
-df = pd.read_json('recipes.json') 
-
-# Выводим на экран первые строки полученного DataFrame
-combined_set = set(chain.from_iterable(df['ingredients']))
-print(len(combined_set))
+import requests # Импортируем библиотеку requests
+from bs4 import BeautifulSoup # Импортируем библиотеку BeautifulSoup
+url = 'https://nplus1.ru/news/2021/10/11/econobel2021' # Определяем адрес страницы
+response = requests.get(url) # Выполняем GET-запрос, содержимое ответа присваивается переменной response
+page = BeautifulSoup(response.text, 'html.parser') # Создаём объект BeautifulSoup, указывая html-парсер
+print(page.title) # Получаем тег title, отображающийся на вкладке браузера
+print(page.title.text) # Выводим текст из полученного тега, который содержится в атрибуте text
