@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # Определяем адрес страницы
-url = 'https://nplus1.ru/news/2021/10/11/econobel2021'
+url = 'https://www.zdorovo365.ru/vakansii.html'
 
 # Выполняем GET-запрос
 response = requests.get(url)
@@ -10,13 +10,11 @@ response = requests.get(url)
 # Создаём объект BeautifulSoup
 page = BeautifulSoup(response.text, 'html.parser')
 
-# Находим все meta теги с атрибутом name
-meta_description = page.find('meta', attrs={'itemprop': 'datePublished'})
-meta_og_title = page.find('meta', attrs={'property': 'og:site_name'})
+vacancy_header = page.find('h3', string ="Наши вакансии")
+vacancy_position = page.find_all('span', class_='t')
 
-# Выводим значения атрибутов content для найденных meta-тегов
-if meta_description:
-    print("Meta Description:", meta_description['content'])
+print(vacancy_header.string)
+# Выводим текст каждого элемента
+for i, position in enumerate(vacancy_position, 1):
+    print(f"Должность {i}: {position.text}")
 
-if meta_og_title:
-    print("OG Title:", meta_og_title['content'])
